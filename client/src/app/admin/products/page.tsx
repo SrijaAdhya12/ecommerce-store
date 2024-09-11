@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import PageHeader from '../_components/PageHeader'
@@ -5,7 +6,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import db from '@/db/db'
 import { CheckCircle2, MoreVertical, XCircle } from 'lucide-react'
 import { formatCurrency, formatNumber } from '@/lib/formatters'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { ActiveToggleDropdownItem, DeleteDropdownItem } from './_components/ProductAction'
 
 const AdminProductsPage = () => {
 	return (
@@ -81,6 +83,9 @@ const ProductTable = async () => {
 									<DropdownMenuItem asChild>
 										<Link href={`/admin/products/${product.id}/edit`}>Edit</Link>
 									</DropdownMenuItem>
+									<ActiveToggleDropdownItem id={product.id} isAvailableForPurchase={product.isAvailableForPurchase} />
+									<DropdownMenuSeparator />
+									<DeleteDropdownItem id={product.id} disabled={product._count.orders > 0} />
 								</DropdownMenuContent>
 							</DropdownMenu>
 						</TableCell>
