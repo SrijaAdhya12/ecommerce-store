@@ -4,12 +4,12 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 0,
 })
 
-export function formatCurrency(amount: number) {
+export const formatCurrency = (amount: number) => {
     return CURRENCY_FORMATTER.format(amount)
 }
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("en-US")
 
-export function formatNumber(number: number) {
+export const formatNumber = (number: number) => {
     return NUMBER_FORMATTER.format(number)
 }

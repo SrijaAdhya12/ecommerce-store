@@ -1,5 +1,5 @@
 import PageHeader from '@/app/admin/_components/PageHeader'
-import db from '@/db/db'
+import db from '@/db'
 import ProductForm from '../../_components/ProductForm'
 
 export default async function EditProductPage({ params: { id } }: { params: { id: string } }) {

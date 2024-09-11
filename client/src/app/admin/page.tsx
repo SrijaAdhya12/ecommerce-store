@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import db from '@/db/db'
-import { formatCurrency, formatNumber } from '@/lib/formatters'
+import db from '@/db'
+import { formatCurrency, formatNumber } from '@/lib'
 const getSalesData = async () => {
 	const data = await db.order.aggregate({
 		_sum: {
