@@ -5,7 +5,11 @@ import { usePathname } from 'next/navigation'
 import { ComponentProps, ReactNode } from 'react'
 
 export function Nav({ children }: { children: ReactNode }) {
-	return <nav className="bg-primary text-primary-foreground flex justify-center px-4">{children}</nav>
+	return (
+		<header className="bg-primary text-primary-foreground flex justify-center sticky top-0 z-10 shadow-xl">
+			<nav className="container mx-auto flex items-center justify-center">{children}</nav>
+		</header>
+	)
 }
 
 export function NavLink(props: Omit<ComponentProps<typeof Link>, 'className'>) {

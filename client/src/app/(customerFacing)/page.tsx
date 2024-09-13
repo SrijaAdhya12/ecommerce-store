@@ -1,48 +1,53 @@
-import { ProductCard } from "@/components"
-import { Button } from "@/components/ui/button"
-import db from "@/db"
-import { Product } from "@prisma/client"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { ProductCard } from '@/components'
+import { Button } from '@/components/ui/button'
+import db from '@/db'
+import { Product } from '@prisma/client'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 const getMostPopularProducts = () => {
-    return db.product.findMany({
-        where: {
-        isAvailableForPurchase: true
-    } ,orderBy: {
-            orders: {
-                _count: 'desc'
-            }
-    }, take: 6})
+	return db.product.findMany({
+		where: {
+			isAvailableForPurchase: true
+		},
+		orderBy: {
+			orders: {
+				_count: 'desc'
+			}
+		},
+		take: 6
+	})
 }
 
 const getNewestProducts = () => {
-    return db.product.findMany({
-        where: {
-        isAvailableForPurchase: true
-    } ,orderBy: {
-            createdAt: 'desc'
-    }, take: 6})
+	return db.product.findMany({
+		where: {
+			isAvailableForPurchase: true
+		},
+		orderBy: {
+			createdAt: 'desc'
+		},
+		take: 6
+	})
 }
 
-
-const Homepage = () => {
-  return (
-		<main className="space-y-12">
+const Home = () => {
+	return (
+		<main className="space-y-12 container mx-auto my-6">
 			<ProductGridSection title="Most Poplular" productsFetcher={getMostPopularProducts} />
 			<ProductGridSection title="Newest" productsFetcher={getNewestProducts} />
 		</main>
-  )
+	)
 }
 
 type ProductGridSectionProps = {
-    title: string
-    productsFetcher: () => Promise<Product[]>
+	title: string
+	productsFetcher: () => Promise<Product[]>
 }
 
 const ProductGridSection = async ({ productsFetcher, title }: ProductGridSectionProps) => {
-    return (
-		<div className="space-y-4">
+	return (
+		<section className="space-y-4">
 			<div className="flex gap-4">
 				<h2 className="text-3xl font-bold">{title}</h2>
 				<Button variant="outline" asChild>
@@ -52,13 +57,13 @@ const ProductGridSection = async ({ productsFetcher, title }: ProductGridSection
 					</Link>
 				</Button>
 			</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {(await productsFetcher()).map(product => (
-                    <ProductCard key={product.id} {...product} />
-                ))}
-            </div>
-		</div>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+				{(await productsFetcher()).map((product) => (
+					<ProductCard key={product.id} {...product} />
+				))}
+			</div>
+		</section>
 	)
 }
 
-export default Homepage
+export default Home

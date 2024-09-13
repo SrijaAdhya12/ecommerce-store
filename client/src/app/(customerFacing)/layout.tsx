@@ -1,12 +1,8 @@
-import { Nav, NavLink } from '../../components/Nav'
+import { Nav, NavLink } from '@/components/Nav'
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
-export default function Layout({
-	children
-}: Readonly<{
-	children: React.ReactNode
-}>) {
+const CustomerLayout = ({children}: Readonly<{children: React.ReactNode}>) => {
 	return (
 		<>
 			<Nav>
@@ -14,7 +10,9 @@ export default function Layout({
 				<NavLink href="/products">Products</NavLink>
 				<NavLink href="/orders">My Orders</NavLink>
 			</Nav>
-			<div className="container my-6">{children}</div>
+			{children}
 		</>
 	)
 }
+
+export default CustomerLayout
