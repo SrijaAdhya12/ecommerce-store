@@ -1,12 +1,11 @@
 import { unstable_cache as nextCache } from "next/cache";
 
-type Callback<T extends any[] = any[]> = (...args: T) => Promise<any>;
+type Callback<Args extends unknown[] = unknown[], Return = unknown> = (...args: Args) => Promise<Return>;
 
-export function cache<T extends Callback>(
-    cb: T,
+export function cache<Args extends unknown[], Return>(
+    cb: Callback<Args, Return>,
     keyParts: string[],
     options: { revalidate?: number | false; tags?: string[] } = {}
 ) {
-    // Wrap the callback with nextCache directly
     return nextCache(cb, keyParts, options);
 }
