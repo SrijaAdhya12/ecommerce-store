@@ -111,6 +111,8 @@ export const toogleProductAvailability = async (id: string, isAvailableForPurcha
         where: { id },
         data: { isAvailableForPurchase },
     })
+    revalidatePath("/")
+    revalidatePath("/products")
 }
 
 export const deleteProduct = async (id: string) => {
@@ -119,4 +121,7 @@ export const deleteProduct = async (id: string) => {
 
     await fs.unlink(product.filePath)
     await fs.unlink(`public${product.imagePath}`)
+    revalidatePath("/")
+    revalidatePath("/products")
+
 }
