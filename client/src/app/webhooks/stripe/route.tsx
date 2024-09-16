@@ -6,7 +6,7 @@ import { Resend } from 'resend'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
 const resend = new Resend(process.env.RESEND_API_KEY as string)
 
-export async function POST(req: NextRequest) {
+export const POST = async (req: NextRequest) => {
 	const event = await stripe.webhooks.constructEvent(
 		await req.text(),
 		req.headers.get('stripe-signature') as string,
@@ -35,18 +35,19 @@ export async function POST(req: NextRequest) {
 			select: { orders: { orderBy: { createdAt: 'desc' }, take: 1 } }
 		})
 
-		// const downloadVerification = await db.downloadVerification.create({
-		// 	data: {
-		// 		productId,
-		// 		expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24)
-		// 	}
-		// })
+		const downloadVerification = await db.downloadVerification.create({
+			data: {
+				productId,
+				expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24)
+			}
+		})
 
 		await resend.emails.send({
-			from: `Support<${process.env.SENDER_EMAIL}>`,
+			from: `Support <${process.env.SENDER_EMAIL}>`,
 			to: email,
 			subject: 'Order Confirmation',
 			react: <h1>hi</h1>
+			// <PurchaseRecieptEmail order={order} product={product} downloadVerificationId={downloadVerification.id} />
 		})
 	}
 
