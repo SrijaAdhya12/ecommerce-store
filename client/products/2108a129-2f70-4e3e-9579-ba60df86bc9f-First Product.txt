@@ -1,0 +1,3 @@
+mongodb1234
+
+mongodb+srv://srijaadhya11sc2020:mongodb1234@developerday.uvmx9.mongodb.net/
