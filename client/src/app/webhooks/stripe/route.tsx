@@ -28,21 +28,19 @@ export async function POST(req: NextRequest) {
 			email,
 			orders: { create: { productId, pricePaidInCents } }
 		}
-		const {
-			orders: [order]
-		} = await db.user.upsert({
+		await db.user.upsert({
 			where: { email },
 			create: userFields,
 			update: userFields,
 			select: { orders: { orderBy: { createdAt: 'desc' }, take: 1 } }
 		})
 
-		const downloadVerification = await db.downloadVerification.create({
-			data: {
-				productId,
-				expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24)
-			}
-		})
+		// const downloadVerification = await db.downloadVerification.create({
+		// 	data: {
+		// 		productId,
+		// 		expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24)
+		// 	}
+		// })
 
 		await resend.emails.send({
 			from: `Support<${process.env.SENDER_EMAIL}>`,
