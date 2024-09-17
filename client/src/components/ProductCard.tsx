@@ -1,47 +1,42 @@
-import { formatCurrency } from "@/lib"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Button } from "./ui/button"
-import Link from "next/link"
-import Image from "next/image"
+import { formatCurrency } from '@/lib'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Button } from './ui/button'
+import Link from 'next/link'
+import Image from 'next/image'
 
 type ProductCardProps = {
-    id: string
-    name: string
-    priceInCents: number
-    description: string
-    imagePath: string
+	id: string
+	name: string
+	priceInCents: number
+	description: string
+	imagePath: string
 }
 
-const ProductCard = ({ id, name, priceInCents, description, imagePath} : ProductCardProps) => {
-  return (
-      <Card className="flex overflow-hidden flex-col">
-          <div className="relative w-full h-auto aspect-video">
-              <Image className="object-contain" src={imagePath} fill alt={name} />
-          </div>
-          <CardHeader>
-              <CardTitle>
-                  {name}
-              </CardTitle>
-          <CardDescription>
-              {formatCurrency(priceInCents / 100)}
-          </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-grow">
-              <p className="line-clamp-4">{description}</p>
-          </CardContent>
-          <CardFooter>
-              <Button asChild size="lg" className="w-full">
-                  <Link href={`/products/${id}/purchase`}>
-                      Purchase
-                  </Link>
-              </Button>
-          </CardFooter>
-          </Card>
-  )
+const ProductCard = ({ id, name, priceInCents, description, imagePath }: ProductCardProps) => {
+	return (
+		<Card className="flex overflow-hidden flex-col p-5">
+			<div className="relative w-full h-auto aspect-video">
+				<Image className="object-contain" src={imagePath} fill alt={name} />
+			</div>
+			<CardHeader>
+				<CardTitle>{name}</CardTitle>
+				<CardDescription>{formatCurrency(priceInCents / 100)}</CardDescription>
+			</CardHeader>
+			<CardContent className="flex-grow">
+				<p className="line-clamp-4">{description}</p>
+			</CardContent>
+			<CardFooter>
+				<Button asChild size="lg" className="w-full">
+					<Link href={`/products/${id}/purchase`}>Purchase</Link>
+				</Button>
+			</CardFooter>
+		</Card>
+	)
 }
 
-export const ProductCardSkeleton = () => { 
-     return <Card className="overflow-hidden flex flex-col animate-pulse">
+export const ProductCardSkeleton = () => {
+	return (
+		<Card className="overflow-hidden flex flex-col animate-pulse">
 			<div className="w-full aspect-video bg-gray-300" />
 			<CardHeader>
 				<CardTitle>
@@ -60,7 +55,7 @@ export const ProductCardSkeleton = () => {
 				<Button className="w-full" disabled size="lg"></Button>
 			</CardFooter>
 		</Card>
+	)
 }
-
 
 export default ProductCard

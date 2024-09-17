@@ -41,7 +41,9 @@ const getNewestProducts = cache(() => {
 const Home = () => {
 	return (
 		<main className="space-y-12 container mx-auto my-6">
-			<ProductGridSection title="Most Popular" productsFetcher={getMostPopularProducts} />
+			<div className="py-6">
+				<ProductGridSection title="Most Popular" productsFetcher={getMostPopularProducts} />
+			</div>
 			<ProductGridSection title="Newest" productsFetcher={getNewestProducts} />
 		</main>
 	)
@@ -54,7 +56,7 @@ type ProductGridSectionProps = {
 
 const ProductGridSection = ({ productsFetcher, title }: ProductGridSectionProps) => {
 	return (
-		<section className="space-y-4">
+		<section className="space-y-4 mx-6">
 			<div className="flex gap-4">
 				<h2 className="text-3xl font-bold">{title}</h2>
 				<Button variant="outline" asChild>
