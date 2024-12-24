@@ -1,4 +1,4 @@
-    updated on: 23rd October 2024, Wednesday
+    updated on: 24th December 2024, Tuesday
 
 <div align=center>
     <a href="https://github.com/SrijaAdhya12/ecommerce-store">
@@ -121,4 +121,4 @@
 [line]: https://user-images.githubusercontent.com/75939390/137615281-3a875960-92cc-407f-97fe-fd2319bdb252.png
 [License]: https://github.com/SrijaAdhya12/ecommerce-store/blob/main/LICENSE
 
-<!-- 23/10/24 -->
+<!-- 24/12/24 -->
